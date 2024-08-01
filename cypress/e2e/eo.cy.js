@@ -7,6 +7,7 @@ describe('Test Page with EO bundle', () => {
     const fundReleasenote = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests';
     const password = 'Maski1#109';
     const comment = 'Done Comment';
+    const sessionId = '181';
     const installmentnumber = 6;
     const percentage = 1;
     // Handle uncaught exceptions to prevent test failure
@@ -35,7 +36,7 @@ describe('Test Page with EO bundle', () => {
         // Proceed to the next page
         cy.visit(fundReleasenote);
         cy.get('#bundle-request-create').click();
-        cy.get('#slip-session').select('181');
+        cy.get('#slip-session').select(sessionId);
         cy.get('#slip-session-installment').select(installmentnumber);
         cy.get('#bundle-request-percentage').type(percentage);
         cy.get('#new-bundle-request-btn').click();
