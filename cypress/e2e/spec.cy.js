@@ -4,16 +4,13 @@ describe('Test Page with Multiple User IDs', () => {
   // Array of user IDs to test  
   const userIds = ['01711111111', '01911403111', '01754191151', '01711193187'];
   // Loop through each ID  
-
+  const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
+  const review = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/754';
+  const password = 'Maski1#109';
+  const comment = 'Done Comment';
   userIds.forEach((userId) => {
     it(`should display user information for ID: ${userId}`, () => {
-      // Visit the page with the user ID  
-      const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
       const username = `${userId}`;
-      const password = 'Maski1#109';
-      const comment = 'Done Comment';
-      // Perform assertions  
-      const review = 'https://ops.ipemis.qa.innovatorslab.net/eie/bundle-request/review/362';
       // Handle uncaught exceptions to prevent test failure
       Cypress.on('uncaught:exception', (err, runnable) => {
         console.log('Caught an exception:', err);
@@ -33,7 +30,7 @@ describe('Test Page with Multiple User IDs', () => {
       cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').
         type(comment);
       cy.get('input[type="checkbox"]').check();
-      //cy.get('#confirm-approve-request').click();
+     // cy.get('#confirm-approve-request').click();
       //cy.get('#cancel-approve-request').click();
 
       // const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
