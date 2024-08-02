@@ -48,7 +48,8 @@ describe('Test Page with Multiple User IDs', () => {
             }
             else {
                 cy.get('#bundle-request-approve').click();
-                cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').type(comment);
+                cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').
+                type(comment, {delay: 100});
                 cy.get('input[type="checkbox"]').check({ force: true }); // Force interaction
                 cy.get('#confirm-approve-request').click();
             }
