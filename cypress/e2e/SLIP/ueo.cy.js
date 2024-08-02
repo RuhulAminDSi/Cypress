@@ -9,7 +9,7 @@ describe('Test Page with Multiple User IDs', () => {
         '01712035989',
         '01712084072',
         '01722505413'
-    ];
+    ]
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
     const bundleId = Cypress.env('bundleId');
@@ -43,16 +43,19 @@ describe('Test Page with Multiple User IDs', () => {
             cy.url().should('not.include', 'login');
 
             cy.visit(appList);
+            let c = 0;
             cy.contains('No matching records found').then($element => {
-                if ($element.length > 0) {
+                if ($element.length < 0) {
+                    // processPages();
                     // Stop further processing
+                }
+                else {
+                    c = 1;
                     cy.log('No matching records found');
                     cy.visit(logoutUrl);
                 }
-                else {
-                    processPages();
-                }
-            })
+            });
+            if (c) processPages();
 
 
 
@@ -70,7 +73,6 @@ describe('Test Page with Multiple User IDs', () => {
             if ($element.length > 0) {
                 // Stop further processing
                 cy.log('Session is not active, stopping loop and redirecting.');
-
                 cy.visit(appList);
                 return;
             } else {

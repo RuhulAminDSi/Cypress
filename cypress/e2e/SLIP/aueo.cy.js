@@ -42,19 +42,8 @@ describe('Test Page with Multiple User IDs', () => {
             cy.url().should('not.include', 'login');
 
             cy.visit(appList);
-            let c = 0;
-            cy.contains('No matching records found').then($element => {
-                if ($element.length < 0) {
-                    // processPages();
-                    // Stop further processing
-                }
-                else {
-                    c = 1;
-                    cy.log('No matching records found');
-                    cy.visit(logoutUrl);
-                }
-            });
-            if(c) processPages();
+            
+            
 
 
 
@@ -80,7 +69,7 @@ describe('Test Page with Multiple User IDs', () => {
                     cy.get('#reject-btn').click();
                     cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
                     // cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                    // cy.get('#confirm-reject-request').click(); //for rejection
+                     cy.get('#confirm-reject-request').click(); //for rejection
                 }
                 else {
                     cy.get('#approve-btn').click();
