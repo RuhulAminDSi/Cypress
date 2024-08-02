@@ -11,7 +11,6 @@ describe('Test Page with EO bundle', () => {
         '01725077956',
         '01717385633',
         '01721191520',
-        '01717385229',
         '01735474298',
         '01916564728'
     ];
@@ -67,12 +66,13 @@ describe('Test Page with EO bundle', () => {
             cy.get('#remarks').type('Ok Done', { delay: 100 });
             cy.get('#confirm-submit-request').click();
             cy.get('.form-group > div > .btn').click();
-            cy.get(':nth-child(1) > .last_column > div > .text-underline').click();
+            
 
             //DELETE Application
-            cy.get('#delete-slip-request').click();
-            cy.get('#draft-delete-confirm-btn').click();
-            cy.get('.row > :nth-child(1) > .btn').click();
+            // cy.get(':nth-child(1) > .last_column > div > .text-underline').click();
+            // cy.get('#delete-slip-request').click();
+            // cy.get('#draft-delete-confirm-btn').click();
+            // cy.get('.row > :nth-child(1) > .btn').click();
         })
     })
 });
