@@ -5,7 +5,8 @@ describe('Test Page with Multiple User IDs', () => {
     const userIds = ['01711111111', '01911403111', '01754191151', '01711193187', '01547854996'];
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const bundleId = Cypress.env('bundleId');
-    const review = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/${bundleId}`;
+    //const review = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/${bundleId}`;
+    const appList = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests/pending';
     const password = 'Maski1#109';
     const comment = 'Done Comment';
 
@@ -32,7 +33,10 @@ describe('Test Page with Multiple User IDs', () => {
 
             cy.url().should('not.include', 'login');
 
-            cy.visit(review);
+            //cy.visit(review);
+            cy.visit(appList);
+            cy.get('button').contains('Manage').click({force: true});
+            cy.get('.dropdown-item.text-right').contains('Approve').click({force: true});
 
             if (username == '01547854996' && reject == 1) {
                 cy.get('#bundle-request-reject').click();
@@ -53,6 +57,9 @@ describe('Test Page with Multiple User IDs', () => {
             if(username !='01547854996'){
                 const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
                 cy.visit(logoutUrl);
+            }
+            else{
+                cy.get('.form-group > div > .btn').click();
             }
             
 

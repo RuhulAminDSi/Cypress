@@ -8,7 +8,7 @@ describe('Test Page with EO bundle', () => {
     const password = 'Maski1#109';
     const comment = 'Done Comment';
     const sessionId = '181';
-    const installmentnumber = 6;
+    const installmentnumber = 7;
     const percentage = 1;
     // Handle uncaught exceptions to prevent test failure
     Cypress.on('uncaught:exception', (err, runnable) => {
@@ -51,8 +51,8 @@ describe('Test Page with EO bundle', () => {
         cy.get('#confirm-submit-request').click();
         cy.get('.form-group > div > .btn').click();
 
-         cy.get('button').contains('Manage').first().click({force: true});
-         cy.contains('View Application Details').click({force: true});
+        //  cy.get('button').contains('Manage').first().click({force: true});
+        //  cy.contains('View Application Details').click({force: true});
 
         //  cy.get('#delete-slip-request').click();
         //  cy.get('#draft-delete-confirm-btn').click();
