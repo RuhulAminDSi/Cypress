@@ -3,11 +3,12 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const AUEOphoneNumbers = [
-        '01729830890', '01720686547',  '01306628285', '01710547016', '01725185804', '01717085864', '01759413141',
+        '01729830890', '01720686547', '01306628285', '01710547016',
+        '01725185804', '01717085864', '01759413141',
         '01718102988', '01718528450',
-        '01752712875', '01716464563', 
-        '01716593163', '01725130074', 
-       
+        '01752712875', '01716464563', '01716936184', '01916521801',
+        '01716593163', '01725130074', '01718749992', '01789968691',
+
     ]
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
@@ -51,30 +52,33 @@ describe('Test Page with Multiple User IDs', () => {
     });
     function processPages() {
         cy.log("asche");
-        cy.get(':nth-child(1) > .last_column > div > .text-underline').click();
 
-        cy.log('ok continue');
-        if (reject == 1) {
-            cy.get('#reject-btn').click();
-            cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
-            // cy.get('#reject-acknowledged-checkbox').check({ force: true });
-            cy.get('#confirm-reject-request').click(); //for rejection
-        }
-        else {
-            cy.get('#approve-btn').click();
-            cy.get('.modal-body > div.mt-3 > :nth-child(2) > #remarks').type(comment, { delay: 100 });
-            cy.get('#confirm-approve-request').click();
-        }
-        //cy.visit(appList);
-        // cy.get('.form-group > div > .btn').click();if (flag) {
-        // Recursive call to process the next iteration
-        cy.get('.form-group > div > .btn').click().then($elem => {
-            if ($elem > 0) {
-                processPages();
-            } else {
-                cy.log('Stopping recursion as we are no longer on the application list page.');
+        for (let i = 0; i < 10; i++) {
+            cy.get(':nth-child(1) > .last_column > div > .text-underline').click();
+
+            cy.log('ok continue');
+            if (reject == 1) {
+                cy.get('#reject-btn').click();
+                cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
+                // cy.get('#reject-acknowledged-checkbox').check({ force: true });
+                cy.get('#confirm-reject-request').click(); //for rejection
             }
-        });
+            else {
+                cy.get('#approve-btn').click();
+                cy.get('.modal-body > div.mt-3 > :nth-child(2) > #remarks').type(comment, { delay: 100 });
+                cy.get('#confirm-approve-request').click();
+            }
+            //cy.visit(appList);
+            // cy.get('.form-group > div > .btn').click();if (flag) {
+            // Recursive call to process the next iteration
+            cy.get('.form-group > div > .btn').click().then($elem => {
+                if ($elem > 0) {
+                    processPages();
+                } else {
+                    cy.log('Stopping recursion as we are no longer on the application list page.');
+                }
+            });
+        }
 
 
     }
