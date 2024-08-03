@@ -3,10 +3,11 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const AUEOphoneNumbers = [
-        '01729830890', '01720686547', '01306628285', '01710547016',
+        '01725185804',
+        '01729830890',  '01916521801','01720686547', '01306628285', '01710547016',
         '01725185804', '01717085864', '01759413141',
         '01718102988', '01718528450',
-        '01752712875', '01716464563', '01716936184', '01916521801',
+        '01752712875', '01716464563', '01716936184',
         '01716593163', '01725130074', '01718749992', '01789968691',
 
     ]
@@ -61,12 +62,12 @@ describe('Test Page with Multiple User IDs', () => {
                 cy.get('#reject-btn').click();
                 cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
                 // cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                cy.get('#confirm-reject-request').click(); //for rejection
+                cy.get('#confirm-reject-request').click({ force: true }); //for rejection
             }
             else {
                 cy.get('#approve-btn').click();
                 cy.get('.modal-body > div.mt-3 > :nth-child(2) > #remarks').type(comment, { delay: 100 });
-                cy.get('#confirm-approve-request').click();
+                cy.get('#confirm-approve-request').click({ force: true });
             }
             //cy.visit(appList);
             // cy.get('.form-group > div > .btn').click();if (flag) {

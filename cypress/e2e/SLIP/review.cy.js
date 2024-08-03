@@ -51,7 +51,7 @@ describe('Test Page with Multiple User IDs', () => {
                 cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').
                 type(comment, {delay: 100});
                 cy.get('input[type="checkbox"]').check({ force: true }); // Force interaction
-                cy.get('#confirm-approve-request').click();
+                cy.get('#confirm-approve-request').click({ force: true });
             }
 
             //cy.get('#cancel-approve-request').click();

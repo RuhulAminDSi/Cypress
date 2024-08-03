@@ -3,12 +3,12 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const AUEOphoneNumbers = [
-        '01864128333',
+        '01864128333','01722505413',
         '01746183334',
         '01716411240',
         '01712035989',
         '01712084072',
-        '01722505413'
+        
     ]
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
@@ -61,13 +61,13 @@ describe('Test Page with Multiple User IDs', () => {
                 cy.get('#reject-btn').click();
                 cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
                 // cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                cy.get('#confirm-reject-request').click(); //for rejection
+                cy.get('#confirm-reject-request').click({ force: true }); //for rejection
             }
             else {
                 cy.get('#approve-btn').click();
                 cy.get('#consentOfAdditionalAmount').select('false');
                 cy.get(':nth-child(5) > :nth-child(2) > #remarks').type(comment,{delay: 100});
-                cy.get('#confirm-approve-request').click();
+                cy.get('#confirm-approve-request').click({ force: true });
             }
             //cy.visit(appList);
             // cy.get('.form-group > div > .btn').click();if (flag) {

@@ -64,7 +64,7 @@ describe('Test Page with EO bundle', () => {
             cy.get('#request-preview').click();
             cy.get('#submit-btn').click();
             cy.get('#remarks').type('Ok Done', { delay: 100 });
-            cy.get('#confirm-submit-request').click();
+            cy.get('#confirm-submit-request').click({force: true});
             cy.get('.form-group > div > .btn').click();
             
 

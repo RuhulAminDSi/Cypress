@@ -81,9 +81,7 @@ describe('Test Page with Multiple User IDs', () => {
                 const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
                 cy.visit(logoutUrl);
             }
-            else {
-                cy.get('.form-group > div > .btn').click();
-            }
+            
         });
     });
 });
