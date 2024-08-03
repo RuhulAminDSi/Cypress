@@ -54,9 +54,9 @@ describe('Test Page with EO bundle', () => {
         //  cy.get('button').contains('Manage').first().click({force: true});
         //  cy.contains('View Application Details').click({force: true});
 
-        //  cy.get('#delete-slip-request').click();
-        //  cy.get('#draft-delete-confirm-btn').click();
-        //  cy.get('.form-group > div > .btn').click();
+         cy.get('#delete-slip-request').click();
+         cy.get('#draft-delete-confirm-btn').click();
+         cy.get('.form-group > div > .btn').click();
     })
 
 });
