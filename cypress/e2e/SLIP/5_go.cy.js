@@ -56,7 +56,6 @@ describe('Test Page with Multiple User IDs', () => {
                 // cy.get('#upload-submit').click(); // Replace with the actual selector of your submit button
                 cy.get('#upload-go').click();
                 cy.get('#confirm-go-upload-request').click();
-
             }
             else {
                 cy.visit(goReview);
@@ -67,13 +66,13 @@ describe('Test Page with Multiple User IDs', () => {
                     //cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').type(comment);
                     cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
                     cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                    cy.get('#confirm-reject-request').click();
+                    cy.get('#confirm-reject-request').click({ force: true });
                 }
                 else {
                     cy.get('#bundle-request-approve').click();
                     cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').type(comment);
                     cy.get('input[type="checkbox"]').check({ force: true }); // Force interaction
-                    cy.get('#confirm-approve-request').click();
+                    cy.get('#confirm-approve-request').click({ force: true });
                 }
             }
             //cy.get('#cancel-approve-request').click();

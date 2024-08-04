@@ -44,7 +44,7 @@ describe('Test Page with Multiple User IDs', () => {
                 cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
               
                 cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                cy.get('#confirm-reject-request').click();
+                cy.get('#confirm-reject-request').click({ force: true });
             }
             else {
                 cy.get('#bundle-request-approve').click();

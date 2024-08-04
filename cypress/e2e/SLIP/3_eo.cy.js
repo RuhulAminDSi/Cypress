@@ -7,9 +7,9 @@ describe('Test Page with EO bundle', () => {
     const fundReleasenote = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests';
     const password = 'Maski1#109';
     const comment = 'Done Comment';
-    const sessionName = 'Test From Home';
-    const installmentnumber = 1;
-    const percentage = 10;
+    const sessionId = 1; // 1 for mid term, 2 for annual plan
+    const installmentnumber = 6;
+    //const percentage = 10;
     // Handle uncaught exceptions to prevent test failure
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log('Caught an exception:', err);
@@ -39,11 +39,11 @@ describe('Test Page with EO bundle', () => {
         // cy.get('#slip-session').select(sessionName);
         cy.get('#slip-session').then($select => {
             const options = $select.find('option');
-            const optionToSelect = options.eq(2).val(); // Select the third option (index 2)
+            const optionToSelect = options.eq(sessionId).val(); // Select the third option (index 2)
             cy.wrap($select).select(optionToSelect);
         });
         cy.get('#slip-session-installment').select(installmentnumber);
-        cy.get('#bundle-request-percentage').type(percentage);
+        //cy.get('#bundle-request-percentage').type(percentage);
         cy.get('#new-bundle-request-btn').click();
         //cy.visit('https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/create');
         cy.get(':nth-child(3) > .col-7 > .form-control').type('02.08.2024.12.11');
