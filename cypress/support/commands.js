@@ -25,3 +25,19 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
+// cypress/support/commands.js
+
+// cypress/support/commands.js
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.visit('https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN');
+    cy.get('input[type="text"]').type(username);
+    cy.get('input[type="password"]').type(password);
+    cy.get('#login-submit').click();
+  
+    // Wait for login to complete and assert if necessary
+    cy.url().should('not.include', 'login');
+  });
+  
+  
+  

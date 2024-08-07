@@ -18,7 +18,8 @@ describe('Test Page with EO bundle', () => {
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const slipForm = 'https://ops.ipemis.qa.innovatorslab.net/submit-slip';
     const password = 'Maski1#109';
-    const purpose = 'School General Information Objective Of Developing School Development Plan';
+    const purpose = 'School General Information Objective';
+    const comment = 'ok done';
     // Handle uncaught exceptions to prevent test failure
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log('Caught an exception:', err);
@@ -63,7 +64,7 @@ describe('Test Page with EO bundle', () => {
             // Proceed to the next page
             cy.get('#request-preview').click();
             cy.get('#submit-btn').click();
-            cy.get('#remarks').type('Ok Done', { delay: 100 });
+            cy.get('#remarks').type(comment, { delay: 100 });
             cy.get('#confirm-submit-request').click({force: true});
             cy.get('.form-group > div > .btn').click();
             

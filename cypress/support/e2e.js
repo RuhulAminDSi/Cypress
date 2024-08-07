@@ -38,3 +38,5 @@ if (Cypress.config('hideXHRInCommandLog')) {
       app.document.head.appendChild(style);
     }
   }
+
+  

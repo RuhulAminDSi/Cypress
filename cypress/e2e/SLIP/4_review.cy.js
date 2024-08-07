@@ -2,7 +2,9 @@
 
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
-    const userIds = ['01711111111', '01911403111', '01754191151', '01711193187', '01547854996'];
+    const userIds = [
+        '01711111111', '01911403111', '01754191151', '01711193187', 
+        '01547854996'];
     const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
     const bundleId = Cypress.env('bundleId');
     //const review = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/${bundleId}`;

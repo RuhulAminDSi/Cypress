@@ -50,8 +50,8 @@ describe('Test Page with Multiple User IDs', () => {
                 cy.visit(appList);
                 cy.get('button').contains('Manage').click({ force: true });
                 cy.get('.dropdown-item.text-right').contains(' Upload G.O').click({ force: true });
-                cy.get('#goGazetteNumber').type('02.08.2024.12.11');
-                cy.get('#goGazetteDate').type('02/08/2024');
+                cy.get('#goGazetteNumber').type('06.08.2024.12.11');
+                cy.get('#goGazetteDate').type('06/08/2024');
                 cy.get('input[type="file"]').attachFile('image.jpg'); // Replace with the actual selector of your file input and the file name
                 // cy.get('#upload-submit').click(); // Replace with the actual selector of your submit button
                 cy.get('#upload-go').click();
