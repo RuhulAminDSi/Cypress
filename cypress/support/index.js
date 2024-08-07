@@ -16,6 +16,7 @@ Cypress.Cookies.defaults({
     return true;
   },
 });
+// cypress/support/index.js
 
 
 // Import custom commands
