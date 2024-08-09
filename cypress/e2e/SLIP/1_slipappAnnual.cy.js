@@ -1,4 +1,4 @@
-// cypress/integration/login_logout.spec.js
+
 
 describe('Test Page with EO bundle', () => {
     const htTeachers = [
@@ -31,10 +31,8 @@ describe('Test Page with EO bundle', () => {
             cy.visit(loginUrl);
             cy.get('input[type="text"]').type(htMobile); // Adjust the selector if necessary
             cy.get('input[type="password"]').type(password); // Adjust the selector if necessary
-
             // Click the login button
             cy.get('#login-submit').click();
-
             cy.visit(slipForm);
             cy.get('#slipBasicInformation_purposeOfDevelopmentPlan').type(purpose);
             cy.get('#add-income-source').click();
@@ -43,7 +41,6 @@ describe('Test Page with EO bundle', () => {
             cy.get('#income-source-table > .info-row-container > .row > .col-3.pr-4 > .form-row > .form-control')
                 .type(5192, { delay: 100 });
             cy.get('#slipBasicInformation_slipSchoolAnnualIncomeSources_0_remarks').type('Good');
-
             cy.get('#add-update-annual-activity').click();
             // cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_typeOfActivity_masterDataEntryId')
             // .select('5129');
