@@ -1,16 +1,21 @@
-describe('Access Data from JSON File', () => {
-    it('Read and use data from JSON file', () => {
-        cy.readFile('cypress/fixtures/db_data.json').then((data) => {
-            // Iterate through each item in the array
-            data.forEach((item, index) => {
-                // Log the entire item to inspect its structure
-                //cy.log(`Item ${index + 1}: ${JSON.stringify(item)}`);
-                cy.log(`${item.MOBILE_NUMBER}`)
-                // Check the available properties
-                for (const key in item) {
-                    cy.log(`Property: ${key}, Value: ${item[key]}`);
-                }
-            });
-        });
+describe('Using the User Array from Cypress Env', () => {
+    let user = [];
+    console.log(Cypress.env('userArray'));
+    before(() => {
+      // Retrieve the user array from Cypress environment variables
+      cy.log(Cypress.env('userArray'));
+      user = Cypress.env('userArray');
     });
-});
+  
+    it('Uses the user array', () => {
+      if (user && user.length > 0) {
+        user.forEach((mobileNumber) => {
+          cy.log(`Using mobile number: ${mobileNumber}`);
+          // Add more test steps here
+        });
+      } else {
+        cy.log('User array is empty or not set');
+      }
+    });
+  });
+  

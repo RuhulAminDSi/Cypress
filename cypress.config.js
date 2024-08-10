@@ -3,7 +3,6 @@
 const { defineConfig } = require("cypress");
 const { loadDBPlugin } = require("./cypress/plugins/dbPlugin");
 module.exports = defineConfig({
-
   e2e: {
     watchForFileChanges: false,
     defaultCommandTimeout: 4000,
@@ -17,6 +16,11 @@ module.exports = defineConfig({
       DB_USER: "DPE_TTMS",
       DB_PASSWORD: "password",
       DB_CONNECTSTRING: "43.243.207.196:1521/ipemis_pdb",
+      userArray: [],
+      loginUrl: "https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN",
+      logoutUrl: "https://login.ipemis.qa.innovatorslab.net/login?action=sign-out",
+      password:"Maski1#109",
+      comment: "Ok passed"
     },
     // supportFile: 'cypress/support/e2e.js',
 

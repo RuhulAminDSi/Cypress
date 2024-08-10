@@ -1,7 +1,9 @@
-const fs = require('fs');
+let userArray = [];
 
-// Adjust the file path if the file is inside the cypress/fixtures folder
-const htTeachers = JSON.parse(fs.readFileSync('./cypress/fixtures/db_data.json', 'utf8'))
-  .map(item => item.MOBILE_NUMBER);
+const setUserArray = (array) => {
+  userArray = array;
+};
 
-module.exports = htTeachers;
+const getUserArray = () => userArray;
+
+module.exports = { setUserArray, getUserArray };

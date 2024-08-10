@@ -3,17 +3,17 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const userIds = [
-        '01711111111', '01911403111', '01754191151', '01711193187', 
+        '01711111111', '01911403111', 
+        '01754191151', '01711193187', 
         '01547854996'];
-    const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
-    const bundleId = Cypress.env('bundleId');
-    //const review = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/${bundleId}`;
+    const loginUrl = Cypress.env('loginUrl');
+    const logoutUrl = Cypress.env('logoutUrl');
     const appList = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests/pending';
-    const password = 'Maski1#109';
-    const comment = 'Done Comment';
+    const password = Cypress.env('password');
+    const comment = Cypress.env('comment');
 
     // Loop through each ID  
-    const reject = 0;
+    const reject = 1;
     userIds.forEach((userId) => {
         it(`should display user information for ID: ${userId}`, () => {
             cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
@@ -29,36 +29,29 @@ describe('Test Page with Multiple User IDs', () => {
             cy.visit(loginUrl);
             cy.get('input[type="text"]').type(username);
             cy.get('input[type="password"]').type(password);
+            cy.get('#login-submit').click({ force: true });
 
-            // Click the login button
-            cy.get('#login-submit').click();
-
-            cy.url().should('not.include', 'login');
-
-            //cy.visit(review);
             cy.visit(appList);
+            cy.wait(2500)
             cy.get('button').contains('Manage').click({force: true});
             cy.get('.dropdown-item.text-right').contains('Approve').click({force: true});
 
             if (username == '01547854996' && reject == 1) {
                 cy.get('#bundle-request-reject').click();
-                //cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').type(comment);
                 cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
-              
                 cy.get('#reject-acknowledged-checkbox').check({ force: true });
                 cy.get('#confirm-reject-request').click({ force: true });
             }
             else {
                 cy.get('#bundle-request-approve').click();
-                cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks').
-                type(comment, {delay: 100});
-                cy.get('input[type="checkbox"]').check({ force: true }); // Force interaction
+                cy.wait(2000);
+                cy.get('#modal-approve-bundle-request > .modal-dialog > .modal-content > :nth-child(2) > .modal-body > .mt-3 > :nth-child(2) > #remarks')
+                .type(comment)
+                cy.get('#approve-acknowledged-checkbox').check({force:true})
+                //cy.get('input[type="checkbox"]').check({ force: true }); 
                 cy.get('#confirm-approve-request').click({ force: true });
             }
-
-            //cy.get('#cancel-approve-request').click();
             if(username !='01547854996'){
-                const logoutUrl = 'https://login.ipemis.qa.innovatorslab.net/login?action=sign-out';
                 cy.visit(logoutUrl);
             }
             else{
