@@ -1,6 +1,6 @@
 // cypress/integration/login_logout.spec.js
 // const htTeachers = require('../../plugins/array');
-describe('Test Page with EO bundle', () => {
+describe('Test Page ', () => {
     const loginUrl = Cypress.env('loginUrl');
     const logoutUrl = Cypress.env('logoutUrl');
     const slipForm = 'https://ops.ipemis.qa.innovatorslab.net/submit-slip';
@@ -44,102 +44,112 @@ describe('Test Page with EO bundle', () => {
                 cy.visit(slipForm)
                 cy.get('body').then($body => {
                     if ($body.find('#request-preview').length) {
-                        cy.get('#slipBasicInformation_purposeOfDevelopmentPlan').type(purpose);
-                        //ProblemAssessments
-                        {
-                            cy.get('#add-problem-assessment').click();
-                            cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_typeOfProblem_masterDataEntryId')
-                                .then($select => {
-                                    const options = $select.find('option');
-                                    const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
-                                    cy.wrap($select).select(optionToSelect);
-                                });
-                            cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_causeOfProblem').
-                                type('Auto Somossa');
-                            cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_impactOfTheProblem').
-                                type('Kiser Somossa');
-                            cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_actionsRequiredToSolve').
-                                type('Mella Somossa');
-                            cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_abilityToSolveProblems').
-                                type('Hmm Good Somossa');
-                        }
 
-                        //অভৌত চাহিদা
-                        {
-                            cy.get('#add-non-material-needs').click();
-                            cy.get('#slipBasicInformation_slipNonMaterialNeeds_0_typeOfActivity_masterDataEntryId')
-                                .then($select => {
-                                    const options = $select.find('option');
-                                    const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
-                                    cy.wrap($select).select(optionToSelect);
-                                });
-                            cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(2) > .form-row > .form-control')
-                                .type(100);
-                            cy.get('#slipBasicInformation_slipNonMaterialNeeds_0_currentSituation')
-                                .type('valo na');
-                            cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(4) > .form-row > .form-control')
-                                .type(200);
-                            cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(5) > .form-row > .form-control')
-                                .type(5000);
-                        }
+                        cy.get('#slipBasicInformation_purposeOfDevelopmentPlan').then($input => {
+                            if ($input.val()) {
+                                cy.visit(logoutUrl);
+                            } else {
+                                cy.get('#slipBasicInformation_purposeOfDevelopmentPlan').type(purpose);
 
-                        //add-infrastructural-needs
-                        {
-                            cy.get('#add-infrastructural-needs').click();
-                            cy.get('#slipBasicInformation_slipSchoolInfrastructuralNeeds_0_typeOfActivity_masterDataEntryId')
-                                .then($select => {
-                                    const options = $select.find('option');
-                                    const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
-                                    cy.wrap($select).select(optionToSelect);
-                                });
-                            cy.get('#infrastructural-needs-table > .info-row-container > .row > .col-2 > .form-row > .form-control')
-                                .type(50);
-                            cy.get('#slipBasicInformation_slipSchoolInfrastructuralNeeds_0_currentSituation')
-                                .type('valona');
-                            cy.get('#infrastructural-needs-table > .info-row-container > .row > .col.pr-4 > .form-row > .form-control')
-                                .type(50000);
-                        }
+                                //ProblemAssessments
+                                {
+                                    cy.get('#add-problem-assessment').click();
+                                    cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_typeOfProblem_masterDataEntryId')
+                                        .then($select => {
+                                            const options = $select.find('option');
+                                            const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
+                                            cy.wrap($select).select(optionToSelect);
+                                        });
+                                    cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_causeOfProblem').
+                                        type('Auto Somossa');
+                                    cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_impactOfTheProblem').
+                                        type('Kiser Somossa');
+                                    cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_actionsRequiredToSolve').
+                                        type('Mella Somossa');
+                                    cy.get('#slipBasicInformation_slipSchoolProblemAssessments_0_abilityToSolveProblems').
+                                        type('Hmm Good Somossa');
+                                }
+        
+                                //অভৌত চাহিদা
+                                {
+                                    cy.get('#add-non-material-needs').click();
+                                    cy.get('#slipBasicInformation_slipNonMaterialNeeds_0_typeOfActivity_masterDataEntryId')
+                                        .then($select => {
+                                            const options = $select.find('option');
+                                            const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
+                                            cy.wrap($select).select(optionToSelect);
+                                        });
+                                    cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(2) > .form-row > .form-control')
+                                        .type(100);
+                                    cy.get('#slipBasicInformation_slipNonMaterialNeeds_0_currentSituation')
+                                        .type('valo na');
+                                    cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(4) > .form-row > .form-control')
+                                        .type(200);
+                                    cy.get('#non-material-needs-table > .info-row-container > .row > :nth-child(5) > .form-row > .form-control')
+                                        .type(5000);
+                                }
+        
+                                //add-infrastructural-needs
+                                {
+                                    cy.get('#add-infrastructural-needs').click();
+                                    cy.get('#slipBasicInformation_slipSchoolInfrastructuralNeeds_0_typeOfActivity_masterDataEntryId')
+                                        .then($select => {
+                                            const options = $select.find('option');
+                                            const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
+                                            cy.wrap($select).select(optionToSelect);
+                                        });
+                                    cy.get('#infrastructural-needs-table > .info-row-container > .row > .col-2 > .form-row > .form-control')
+                                        .type(50);
+                                    cy.get('#slipBasicInformation_slipSchoolInfrastructuralNeeds_0_currentSituation')
+                                        .type('valona');
+                                    cy.get('#infrastructural-needs-table > .info-row-container > .row > .col.pr-4 > .form-row > .form-control')
+                                        .type(50000);
+                                }
+        
+                                //ADD income Source
+                                {
+                                    cy.get('#add-income-source').click();
+                                    cy.get('#slipBasicInformation_slipSchoolAnnualIncomeSources_0_typeOfIncomeSource_masterDataEntryId')
+                                        .select('5192');
+                                    cy.get('#income-source-table > .info-row-container > .row > .col-3.pr-4 > .form-row > .form-control')
+                                        .type(100, { delay: 100 });
+                                    cy.get('#slipBasicInformation_slipSchoolAnnualIncomeSources_0_remarks').type('Good');
+        
+                                    cy.get('#add-annual-activity').click();
+                                    // cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_typeOfActivity_masterDataEntryId')
+                                    // .select('5129');
+                                    cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_typeOfActivity_masterDataEntryId')
+                                        .then($select => {
+                                            const options = $select.find('option');
+                                            const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
+                                            cy.wrap($select).select(optionToSelect);
+                                        });
+                                }
+                                //ADD ANNUAL ACTIVITY
+                                {
+                                    cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(2) > .form-row > .form-control').type(100);
+                                    cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(3) > .form-row > .form-control')
+                                        .type(200);
+                                    cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(4) > .form-row > .form-control')
+                                        .type(5000);
+                                    cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_responsiblePerson').type('Ruhul');
+                                }
+                                // SUBMIT
+                                {
+                                    cy.get('#request-preview').click();
+                                    cy.get('#submit-btn').click();
+                                    cy.get('#remarks').type('Ok Done', { delay: 100 });
+                                    cy.get('#confirm-submit-request').click();
+                                    cy.get('.form-group > div > .btn').click();
+                                    cy.wait(2500);
+                                    cy.visit(slipList)
+                                    cy.wait(2500);
+                                    cy.visit(logoutUrl)
+                                }
+                            }
+                        });
+                        
 
-                        //ADD income Source
-                        {
-                            cy.get('#add-income-source').click();
-                            cy.get('#slipBasicInformation_slipSchoolAnnualIncomeSources_0_typeOfIncomeSource_masterDataEntryId')
-                                .select('5192');
-                            cy.get('#income-source-table > .info-row-container > .row > .col-3.pr-4 > .form-row > .form-control')
-                                .type(100, { delay: 100 });
-                            cy.get('#slipBasicInformation_slipSchoolAnnualIncomeSources_0_remarks').type('Good');
-
-                            cy.get('#add-annual-activity').click();
-                            // cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_typeOfActivity_masterDataEntryId')
-                            // .select('5129');
-                            cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_typeOfActivity_masterDataEntryId')
-                                .then($select => {
-                                    const options = $select.find('option');
-                                    const optionToSelect = options.eq(1).val(); // Select the third option (index 2)
-                                    cy.wrap($select).select(optionToSelect);
-                                });
-                        }
-                        //ADD ANNUAL ACTIVITY
-                        {
-                            cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(2) > .form-row > .form-control').type(100);
-                            cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(3) > .form-row > .form-control')
-                                .type(200);
-                            cy.get('#annual-activity-table > .info-row-container > .row > :nth-child(4) > .form-row > .form-control')
-                                .type(5000);
-                            cy.get('#slipBasicInformation_slipSchoolAnnualActivities_0_responsiblePerson').type('Ruhul');
-                        }
-                        // SUBMIT
-                        {
-                            cy.get('#request-preview').click();
-                            cy.get('#submit-btn').click();
-                            cy.get('#remarks').type('Ok Done', { delay: 100 });
-                            cy.get('#confirm-submit-request').click();
-                            cy.get('.form-group > div > .btn').click();
-                            cy.wait(2500);
-                            cy.visit(slipList)
-                            cy.wait(2500);
-                            cy.visit(logoutUrl)
-                        }
                     }
                     else {
                         cy.visit(logoutUrl);

@@ -3,14 +3,13 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const AUEOphoneNumbers = [
-        '01725185804',
-        '01729830890', '01916521801', '01720686547', '01306628285', '01710547016',
+        //'01725185804',
+        //'01729830890',
+         '01916521801', '01720686547', '01306628285', '01710547016',
         '01725185804', '01717085864', '01759413141',
         '01718102988', '01718528450',
         '01752712875', '01716464563', '01716936184',
         '01716593163', '01725130074', '01718749992', '01789968691',
-
-
     ]
     const loginUrl = Cypress.env('loginUrl');
     const logoutUrl = Cypress.env('logoutUrl');
@@ -42,9 +41,10 @@ describe('Test Page with Multiple User IDs', () => {
                             if ($body.find('#approve-btn').length) {
                                 if (reject == 1) {
                                     cy.get('#reject-btn').click();
-                                    cy.get('input[type="checkbox"][value="64"]').check({ force: true }); // Attempt to check the checkbox
-                                    // cy.get('#reject-acknowledged-checkbox').check({ force: true });
+                                    cy.get('input[type="checkbox"][value="64"]').check({ force: true }); 
                                     cy.get('#confirm-reject-request').click({ force: true }); //for rejection
+                                    cy.visit(appList);
+                                    cy.wait(2500)
                                 }
                                 else {
                                     cy.get('#approve-btn').click({ force: true });
@@ -52,8 +52,6 @@ describe('Test Page with Multiple User IDs', () => {
                                     cy.get('#confirm-approve-request').click({ force: true });
                                     cy.visit(appList);
                                     cy.wait(2500)
-                                    
-                                    
                                 }
                                 // cy.get('.form-group > div > .btn').click()
                                 //     .then($elem => {

@@ -10,7 +10,7 @@ describe('Test Page with EO bundle', () => {
     const comment = Cypress.env('comment');
     const sessionId = 1; // 1 for mid term, 2 for annual plan
     const installmentnumber = 1;
-    const percentage = 10;
+    const percentage = 10.5;
     // Handle uncaught exceptions to prevent test failure
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log('Caught an exception:', err);

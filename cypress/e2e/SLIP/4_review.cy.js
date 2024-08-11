@@ -13,7 +13,7 @@ describe('Test Page with Multiple User IDs', () => {
     const comment = Cypress.env('comment');
 
     // Loop through each ID  
-    const reject = 1;
+    const reject = 0;
     userIds.forEach((userId) => {
         it(`should display user information for ID: ${userId}`, () => {
             cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
@@ -49,6 +49,7 @@ describe('Test Page with Multiple User IDs', () => {
                 .type(comment)
                 cy.get('#approve-acknowledged-checkbox').check({force:true})
                 //cy.get('input[type="checkbox"]').check({ force: true }); 
+                cy.wait(2000);
                 cy.get('#confirm-approve-request').click({ force: true });
             }
             if(username !='01547854996'){

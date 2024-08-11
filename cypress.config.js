@@ -20,7 +20,7 @@ module.exports = defineConfig({
       loginUrl: "https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN",
       logoutUrl: "https://login.ipemis.qa.innovatorslab.net/login?action=sign-out",
       password:"Maski1#109",
-      comment: "Ok passed"
+      comment: "Okpassed"
     },
     // supportFile: 'cypress/support/e2e.js',
 
