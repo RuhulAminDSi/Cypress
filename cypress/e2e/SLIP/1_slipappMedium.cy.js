@@ -16,8 +16,8 @@ describe('Test Page ', () => {
     before(() => {
         cy.readFile('cypress/fixtures/db_data.json').then((data) => {
             data.forEach(item => {
-                htTeachers.push(item);
-                cy.log(item)
+                htTeachers.push(item.MOBILE_NUMBER);
+                cy.log(item.MOBILE_NUMBER)
             })
         });
     });
@@ -26,13 +26,6 @@ describe('Test Page ', () => {
             cy.log(`For the teacher: ${htMobile}`)
             // it(`SLIP HT Application for ${htMobile}`, () => {
             cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
-            Cypress.on('fail', (error, runnable) => {
-                // Log the error and continue
-                cy.log('An error occurred:', error.message);
-                // Returning false will prevent Cypress from failing the test
-                return false;
-            });
-
             cy.visit(loginUrl);
             cy.get('input[type="text"]').type(htMobile);
             cy.get('input[type="password"]').type(password);

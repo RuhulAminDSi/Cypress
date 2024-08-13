@@ -40,9 +40,9 @@ describe('Test Page with Multiple User IDs', () => {
                             if ($body.find('#approve-btn').length) {
                                 if (reject == 1) {
                                     cy.get('#reject-btn').click();
-                                    cy.get('input[type="checkbox"][value="64"]').check(); // Attempt to check the checkbox
+                                    cy.get('input[type="checkbox"][value="64"]').check(); 
                                     // cy.get('#reject-acknowledged-checkbox').check({ force: true });
-                                    cy.get('#confirm-reject-request').click({ force: true }); //for rejection
+                                    cy.get('#confirm-reject-request').click({ force: true }); 
                                     cy.visit(appList);
                                 }
                                 else {

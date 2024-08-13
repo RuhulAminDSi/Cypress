@@ -13,22 +13,36 @@ describe('Connect to node-oracledb spec', () => {
       });
 
     // Query to fetch data from IPEMIS_PRODUCTION.SLIP
-    const query = `SELECT iu.MOBILE_NUMBER
-    FROM IPEMIS_PRODUCTION.SLIP_BASIC_INFORMATION sbi 
-    JOIN IPEMIS_PRODUCTION.TEACHER t ON t.TEACHER_ID = sbi.SLIP_TEAM_HEAD_TEACHER_ID 
-    JOIN IPEMIS_PRODUCTION.IEIMS_USER iu ON iu.IEIMS_USER_ID = t.IEIMS_USER_ID WHERE SLIP_ID = 186`;
-    const array = [];
+    const query = `SELECT UNIQUE iu.MOBILE_NUMBER, iu.NAME FROM IPEMIS_PRODUCTION.TEACHER t 
+INNER JOIN IPEMIS_PRODUCTION.FUND_ALLOCATION fa ON t.SCHOOL_ID  = fa.SCHOOL_ID
+INNER JOIN IPEMIS_PRODUCTION.IEIMS_USER iu ON iu.IEIMS_USER_ID = t.IEIMS_USER_ID 
+WHERE fa.ALLOCATION_TYPE = 'SLIP' AND t.POST_ID IN (9,72,73,3128) AND  iu.MOBILE_NUMBER IS NOT NULL`;
+
+//SELECT UNIQUE iu.IEIMS_USER_ID, iu.NAME_LOCAL, iu.MOBILE_NUMBER FROM IPEMIS_PRODUCTION.OFFICE_POST op 
+// INNER JOIN  IPEMIS_PRODUCTION.OFFICER_JOB_POSTING ojp ON ojp.POSTED_OFFICE_ID = op.OFFICE_ID 
+// INNER JOIN IPEMIS_PRODUCTION.IEIMS_USER iu ON iu.IEIMS_USER_ID = ojp.OFFICER_ID 
+// INNER JOIN IPEMIS_PRODUCTION.SCHOOL s ON s.GEO_CLUSTER_ID = op.GEO_CLUSTER_ID 
+// WHERE op.GEO_CLUSTER_ID IS NOT NULL AND iu.MOBILE_NUMBER IS NOT NULL AND op.GEO_CLUSTER_ID
+// IN 
+// (
+// SELECT UNIQUE s.GEO_CLUSTER_ID FROM IPEMIS_PRODUCTION.TEACHER t 
+// INNER JOIN IPEMIS_PRODUCTION.FUND_ALLOCATION fa ON t.SCHOOL_ID  = fa.SCHOOL_ID
+// INNER JOIN IPEMIS_PRODUCTION.IEIMS_USER iu ON iu.IEIMS_USER_ID = t.IEIMS_USER_ID 
+// INNER JOIN IPEMIS_PRODUCTION.SCHOOL s ON s.SCHOOL_ID = t.SCHOOL_ID 
+// WHERE fa.ALLOCATION_TYPE = 'SLIP' AND t.POST_ID IN (9,72,73,3128) AND  iu.MOBILE_NUMBER IS NOT NULL
+// );
+//     const array = [];
     cy.task('executeDbStatement', {
       statement: query
     })
       .then((result) => {
         if (result && result.rows && Array.isArray(result.rows)) {
           result.rows.forEach(row => {
-            // Convert the row object to a string and log it
            // cy.log(JSON.stringify(row));
             cy.log(row.MOBILE_NUMBER)
             array.push(row.MOBILE_NUMBER)
             //Cypress.env('userArray').push(row.MOBILE_NUMBER);
+            cy.log(array);
             
           });
         } else {

@@ -1,21 +1,24 @@
 describe('Using the User Array from Cypress Env', () => {
-    let user = [];
-    console.log(Cypress.env('userArray'));
-    before(() => {
-      // Retrieve the user array from Cypress environment variables
-      cy.log(Cypress.env('userArray'));
-      user = Cypress.env('userArray');
-    });
-  
-    it('Uses the user array', () => {
-      if (user && user.length > 0) {
-        user.forEach((mobileNumber) => {
-          cy.log(`Using mobile number: ${mobileNumber}`);
-          // Add more test steps here
-        });
-      } else {
-        cy.log('User array is empty or not set');
-      }
+  const users = [];
+
+  before(() => {
+    cy.readFile('cypress/fixtures/db_data.json').then((data) => {
+      data.forEach(item => {
+        // Push each user's mobile number and name as an array
+        users.push([item.MOBILE_NUMBER, item.NAME]);
+      });
     });
   });
-  
+
+  it('Uses the user array', () => {
+    if (users.length > 0) {
+      users.forEach((user) => {
+        const mobileNumber = user[0]; // Access the mobile number
+        const name = user[1]; // Access the name
+        cy.log(`Mobile Number: ${mobileNumber}, Name: ${name}`);
+      });
+    } else {
+      cy.log('User array is empty or not set');
+    }
+  });
+});

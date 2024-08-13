@@ -15,7 +15,7 @@ describe('Test Page with Multiple User IDs', () => {
     // Loop through each ID  
     const reject = 0;
     userIds.forEach((userId) => {
-        it(`should display user information for ID: ${userId}`, () => {
+        it(`User ID: ${userId}`, () => {
             cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
             // Visit the page with the user ID  
             const username = `${userId}`;

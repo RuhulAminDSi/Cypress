@@ -3,20 +3,16 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const userIds = ['01521532789', '01911403111'];
-    const loginUrl = 'https://login.ipemis.qa.innovatorslab.net/login?lang=en_EN';
-    const bundleId = Cypress.env('bundleId');
-    //const goupload = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/upload-go/${bundleId}`;
+    const loginUrl = Cypress.env('loginUrl');
+    const logoutUrl = Cypress.env('logoutUrl');
     const appList = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests';
-    //const goreview = `https://ops.ipemis.qa.innovatorslab.net/slip/bundle-request/review/${bundleId}`;
     const goReview = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests/pending';
-    const password = 'Maski1#109';
-    const comment = 'Done Comment';
-
-
+    const password = Cypress.env('password');
+    const comment = Cypress.env('comment');
     // Loop through each ID  
     const reject = 0;
     userIds.forEach((userId) => {
-        it(`should display user information for ID: ${userId}`, () => {
+        it(`User ID: ${userId}`, () => {
             cy.intercept({ resourceType: /xhr|fetch/ }, { log: false })
             // Visit the page with the user ID  
             const username = `${userId}`;
