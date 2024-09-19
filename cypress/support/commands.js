@@ -44,6 +44,15 @@ Cypress.Commands.add('logIn', (username, password) =>{
         cy.get(allObj.getUserName()).type(username);
         cy.get(allObj.getPassword()).type(password);
         cy.get(allObj.getSubmit()).click();
+        cy.get('body').then(($body) => {
+            if ($body.find('span:contains("Main Role")').length > 0) {
+                cy.log('Employee has multiple role');
+                cy.get('#user-role-submit').click().wait(2000);
+            }
+            else{
+                cy.log("Already main role only")
+            }
+        });
     }
         // {
         //     cacheAcrossSpecs: true

@@ -1,12 +1,14 @@
 
 const username = []
-const user = '01521532789'
+const user = '01738957729'
 const password = Cypress.env('password');
 let reject = 0;
+const date = '19/09/2024'
 const query = `SELECT s.SCHOOL_CODE FROM IPEMIS_PRODUCTION.PEPMIS_ROOM_CONSTRUCTION_PRIORITY_LIST prcpl
                                              INNER JOIN IPEMIS_PRODUCTION.PEPMIS_ROOM_CONSTRUCTION_PLAN_SCHOOL_INFO prcpsi ON PRCPSI.SCHOOL_ID = PRCPL.SCHOOL_ID
                                              INNER JOIN IPEMIS_PRODUCTION.SCHOOL s ON s.SCHOOL_ID = prcpl.SCHOOL_ID
-               WHERE PRCPSI.STATUS  NOT IN ('ORDER_GENERATED', 'UNDER_CONSTRUCTION','APPROVED', 'PENDING', 'DRAFT') AND ROWNUM <= 50`;
+               WHERE PRCPSI.STATUS  NOT IN ('ORDER_GENERATED', 'UNDER_CONSTRUCTION','APPROVED', 'PENDING', 'DRAFT') 
+                 AND ROWNUM <= 12`;
 
 describe('PEPMIS End to End Testing', () => {
     before('',() =>{
@@ -25,7 +27,7 @@ describe('PEPMIS End to End Testing', () => {
             cy.writeFile('cypress/fixtures/school_code.json', result.rows);
         });
     })
-    it(`Validate the whole PEPMIS for 01521532789`, () => {
+    it(`Validate the whole PEPMIS for ${user}`, () => {
         //login
         cy.login();
         cy.logIn(user, password);
@@ -53,18 +55,24 @@ describe('PEPMIS End to End Testing', () => {
         cy.get('div a span').contains('Save and Proceed').click();
         cy.get('select#project\\.masterDataEntryId').select('3079');
         cy.get('label').contains('Plan Creation Date').parent().siblings()
-            .find('input[type = "text"]').type('18/09/2024');
+            .find('input[type = "text"]').type(date);
         //excluded school selection
         cy.get('button[type = "button"]').contains('Add Schools Outside Priority List').click().wait(1500)
         cy.get('input[value = "588"]').first().click({force: true});
         cy.get('button[type = "button"]').contains('Select').click();
-        cy.get('#noOfClassroomConstructionSuggested').clear().type('1{enter}');
+        cy.get('#noOfClassroomConstructionSuggested').type('1{enter}').wait(2000);
         cy.get('#confirm-add-edit-school-room-count').contains('Confirm').click();
         //update draft
-        cy.get('input[value = "Update Draft"]').click()
-        cy.get('a[role = "button"]').contains('Back to Room Construction Plan List').click()
+        // cy.get('input[value = "Update Draft"]').click()
+        // cy.get('a[role = "button"]').contains('Back to Room Construction Plan List').click()
         //submit plan
-        // cy.get('#submit-btn').click()
+        cy.get('#submit-btn').click().wait(2000);
+        cy.get('label').contains('Suggestion').click()
+        cy.get('#remarks').type('ok done', {force: true, delay: 100});
+        cy.get('#confirm-submit').click({force: true});
+        // cy.get('#cancel-confirmation').click();
+        // cy.get('#back-btn').click();
+        cy.get('a[role="button"]').contains('Back to Room Construction Plan List').click();
 
 
         // cy.logOut();
