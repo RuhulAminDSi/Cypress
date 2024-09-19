@@ -24,10 +24,36 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import 'cypress-file-upload';
-// cypress/support/commands.js
+import {allObject} from "./allObject";
+const allObj = new allObject();
 
-// cypress/support/commands.js
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+    return false;
+});
+
+Cypress.Commands.add('login', () =>{
+    cy.intercept({ resourceType: /xhr|fetch/ }, { log: false });
+    cy.visit('/')
+    cy.get('button[type = "button"]').contains('বাংলা').click();
+    cy.get('div a').contains('English').click();
+})
+Cypress.Commands.add('logIn', (username, password) =>{
+    // cy.session([username, password], () =>
+    {
+        cy.get(allObj.getUserName()).type(username);
+        cy.get(allObj.getPassword()).type(password);
+        cy.get(allObj.getSubmit()).click();
+    }
+        // {
+        //     cacheAcrossSpecs: true
+        // }
+    // )
+})
+Cypress.Commands.add('logOut', ()=>{
+    cy.get('#dropDownMenuButton').click()
+    cy.get('div a span').contains('Sign Out').click();
+})
 
   
   

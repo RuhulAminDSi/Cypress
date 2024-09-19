@@ -34,7 +34,6 @@ describe('Test Page ', () => {
             cy.get('input[type="text"]').type(htMobile);
             cy.get('input[type="password"]').type(password);
             cy.get('#login-submit').click();
-            cy.visit()
             cy.visit(slipTeam);
             cy.wait(2500);
             cy.visit(slipList);
