@@ -3,17 +3,13 @@ const username = []
 const user = '01738957729'
 const password = Cypress.env('password');
 let reject = 0;
-const date = '19/09/2024'
-const query = `SELECT s.SCHOOL_CODE FROM IPEMIS_PRODUCTION.PEPMIS_ROOM_CONSTRUCTION_PRIORITY_LIST prcpl
-                                             INNER JOIN IPEMIS_PRODUCTION.PEPMIS_ROOM_CONSTRUCTION_PLAN_SCHOOL_INFO prcpsi ON PRCPSI.SCHOOL_ID = PRCPL.SCHOOL_ID
-                                             INNER JOIN IPEMIS_PRODUCTION.SCHOOL s ON s.SCHOOL_ID = prcpl.SCHOOL_ID
-               WHERE PRCPSI.STATUS  NOT IN ('ORDER_GENERATED', 'UNDER_CONSTRUCTION','APPROVED', 'PENDING', 'DRAFT') 
-                 AND ROWNUM <= 12`;
-
+const date = new Date().toLocaleDateString('en-GB')
+import {sqlQuery} from "../../support/sqlQuery";
+const query = new sqlQuery()
 describe('PEPMIS End to End Testing', () => {
     before('',() =>{
         cy.task('executeDbStatement', {
-            statement: query
+            statement: query.getSchoolCodeQuery()
         }).then((result) => {
             if (result && result.rows && Array.isArray(result.rows)) {
                 result.rows.forEach(row => {
@@ -48,7 +44,7 @@ describe('PEPMIS End to End Testing', () => {
         //select school from priority list
         username.forEach((user) =>{
             cy.log(user)
-            cy.get('#omniSearch').type(user+'{enter}').clear();
+            cy.get('#omniSearch').type(user+'{enter}').wait(1000).clear();
             cy.get('div a').contains('Add').click();
         })
         // cy.get('div a').contains('Add').click();

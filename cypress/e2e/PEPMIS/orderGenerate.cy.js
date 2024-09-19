@@ -3,7 +3,12 @@ const username = []
 const user = '01738957729'
 const password = Cypress.env('password');
 
-const DateTime = Date.now().toString();
+
+function DateTime() {
+    const now = new Date();
+    return  now.toISOString().replace(/[-:.TZ]/g, '') + Math.random().toString(36).substring(2, 10);
+}
+console.log(DateTime);
 const date = '18/09/2024'
 describe('PEPMIS End to End Testing', () => {
     it(`Validate the whole PEPMIS for ${user}`, () => {
@@ -32,8 +37,8 @@ describe('PEPMIS End to End Testing', () => {
         cy.get('button[type = "button"]').contains('Manage').click()
         cy.get('div a').contains('Details').click()
         cy.get('#order-generate-btn').click()
-        cy.get('#orderGazetteNo').type(DateTime, {force: true}).wait(1500);
-        cy.get('#orderGazetteDate').type(date).wait(1000)
+        cy.get('#orderGazetteNo').type(DateTime(), {force: true}).wait(1500);
+        cy.get('#orderGazetteDate').type(new Date().toLocaleDateString('en-GB')).wait(1000)
         cy.get('#confirm-order-generate').click();
 
         // cy.get('#cancel-confirmation').click();
