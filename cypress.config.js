@@ -29,7 +29,6 @@ module.exports = defineConfig({
       password:"Maski1#109",
       comment: "Okpassed"
     },
-    // supportFile: 'cypress/support/e2e.js',
 
   },
 });
