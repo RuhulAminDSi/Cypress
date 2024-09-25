@@ -16,7 +16,7 @@ describe('PEPMIS End to End Testing', () => {
             '01738957721',
             '01738957722',
             '01738957723',
-            '01547854996'
+            // '01547854996'
         ]
         username.forEach((user) => {
             cy.logIn(user, password);
@@ -25,7 +25,7 @@ describe('PEPMIS End to End Testing', () => {
             //advanced filter
                 .advancedFilterDnothi('flow')
             //approval
-                .ApprovalFlowDnothi()
+                .ApprovalFlowDnothi(user)
             cy.logOut();
         })
 

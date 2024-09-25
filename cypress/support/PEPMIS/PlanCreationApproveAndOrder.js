@@ -1,7 +1,7 @@
 import {sqlQuery} from "../sqlQuery";
 const query = new sqlQuery()
 const datetime = new Date().toLocaleDateString('en-GB')
-const date = '18/09/2024'
+const date = '22/09/2024'
 function DateTime() {
     const now = new Date();
     return  now.toISOString().replace(/[-:.TZ]/g, '') + Math.random().toString(36).substring(2, 10);
@@ -17,7 +17,6 @@ export class PlanCreationApproveAndOrder{
                 result.rows.forEach(row => {
                     // cy.log(JSON.stringify(row));
                     console.log(row.SCHOOL_CODE)
-                    // username.push(row.SCHOOL_CODE)
                 });
             } else {
                 cy.log('No rows returned from the query');
@@ -38,9 +37,6 @@ export class PlanCreationApproveAndOrder{
         cy.get('div ul li a span').contains('Construction and Repair Management').click({force: true})
         cy.contains('Construction Plan List').click().wait(1000)
         return this
-    }
-    findSubMenu(){
-
     }
     addSchoolandConfirm(){
         //click add new plan
@@ -67,12 +63,11 @@ export class PlanCreationApproveAndOrder{
         // cy.get('input[value = "Update Draft"]').click()
         // cy.get('a[role = "button"]').contains('Back to Room Construction Plan List').click()
         //submit plan
-        // cy.get('#submit-btn').click().wait(2000);
-        // cy.get('label').contains('Suggestion').click()
-        // cy.get('#remarks').type('ok done', {force: true, delay: 100});
-        // cy.get('#confirm-submit').click({force: true});
-        // cy.get('#cancel-confirmation').click();
-        // cy.get('#back-btn').click();
+        cy.get('#submit-btn').click().wait(2000);
+        cy.get('label').contains('Suggestion').click()
+        cy.get('#remarks').type('ok done', {force: true, delay: 100});
+        cy.get('#confirm-submit').click({force: true});
+
         cy.get('a[role="button"]').contains('Back to Room Construction Plan List').click();
 
         return this
@@ -86,7 +81,7 @@ export class PlanCreationApproveAndOrder{
         cy.wait(2000)
         return this
     }
-    ApprovalFlowDnothi(){
+    ApprovalFlowDnothi(user){
         cy.get('div table tbody tr').eq(0).invoke('text')
             .then(text => {
                 let isPresent = /Approve/.test(text);
@@ -113,8 +108,6 @@ export class PlanCreationApproveAndOrder{
         cy.get('#orderGazetteDate').type(datetime).wait(1000)
         cy.get('#confirm-order-generate').click();
 
-        // cy.get('#cancel-confirmation').click();
-        // cy.get('#back-btn').click();
         cy.get('a[role="button"]').contains('Back to Room Construction Plan List').click();
     }
 

@@ -7,11 +7,9 @@ import {PlanCreationApproveAndOrder} from "../../support/PEPMIS/PlanCreationAppr
 const query =  new PlanCreationApproveAndOrder()
 describe('PEPMIS End to End Testing', () => {
     before('',() =>{
-        query.executeSchoolCodeQuery()
+        cy.login();
     })
     it(`Validate the whole PEPMIS for EO`, () => {
-        //login
-        cy.login();
         cy.logIn(user, password);
         // OTP submit
         query
@@ -21,6 +19,7 @@ describe('PEPMIS End to End Testing', () => {
         //select school from priority list
         //excluded school selection
         //submit plan and get back to the plan list
+            .executeSchoolCodeQuery()
             .addSchoolandConfirm()
         // cy.logOut();
     })
