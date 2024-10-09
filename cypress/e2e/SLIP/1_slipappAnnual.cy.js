@@ -13,15 +13,16 @@ describe('Test Page ', () => {
         console.log('Caught an exception:', err);
         return false;
     });
-    const htTeachers = []; // Declare outside before hook but initialize inside
-    before(() => {
-        cy.readFile('cypress/fixtures/db_data.json').then((data) => {
-            data.forEach(item => {
-                htTeachers.push(item);
-                cy.log(item)
-            })
-        });
-    });
+    const htTeachers = ['01724629415', '01552349079', '01677129242', '01736163494', '01736163494',
+        '01736163494', '01814704981', '01764248949', '01756421642','01819036808']; // Declare outside before hook but initialize inside
+    // before(() => {
+    //     cy.readFile('cypress/fixtures/db_data.json').then((data) => {
+    //         data.forEach(item => {
+    //             htTeachers.push(item);
+    //             cy.log(item)
+    //         })
+    //     });
+    // });
     it('Start Apply for the HT', () => {
         htTeachers.forEach((htMobile) => {
             cy.log(`For the teacher: ${htMobile}`)

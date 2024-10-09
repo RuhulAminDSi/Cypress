@@ -13,9 +13,10 @@ describe('PEPMIS End to End Testing', () => {
     })
     it(`Validate the whole PEPMIS for D-nothi`, () => {
         const username = [
-            '01738957721',
+            //'01738957721',
             '01738957722',
             '01738957723',
+             '01954584575', //ADG PEDP-4
             // '01547854996'
         ]
         username.forEach((user) => {
@@ -23,7 +24,8 @@ describe('PEPMIS End to End Testing', () => {
             approvalFlow
                 .findMenu()
             //advanced filter
-                .advancedFilterDnothi('flow')
+                .omniSearch('000174')
+                //.advancedFilterDnothi('flow')
             //approval
                 .ApprovalFlowDnothi(user)
             cy.logOut();

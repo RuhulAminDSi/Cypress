@@ -1,7 +1,7 @@
 import {sqlQuery} from "../sqlQuery";
 const query = new sqlQuery()
 const datetime = new Date().toLocaleDateString('en-GB')
-const date = '22/09/2024'
+const date = '25/09/2024'
 function DateTime() {
     const now = new Date();
     return  now.toISOString().replace(/[-:.TZ]/g, '') + Math.random().toString(36).substring(2, 10);
@@ -45,14 +45,15 @@ export class PlanCreationApproveAndOrder{
             item.forEach((school) => {
                 const code = `${school.SCHOOL_CODE}`;
                 cy.get('#omniSearch').type(code+'{enter}').wait(1000).clear();
-                cy.get('div a').contains('Add').click();
+                cy.get('div button').contains('Add').click();
             })
         })
         // cy.get('div a').contains('Add').click();
         cy.get('div a span').contains('Save and Proceed').click();
-        cy.get('select#project\\.masterDataEntryId').select('3079');
+        cy.get('select#project\\.masterDataEntryId').select('3082');
         cy.get('label').contains('Plan Creation Date').parent().siblings()
             .find('input[type = "text"]').type(date);
+        cy.get('#isDnothiFlowApplicable2').check({force: true});
         //excluded school selection
         cy.get('button[type = "button"]').contains('Add Schools Outside Priority List').click().wait(1500)
         cy.get('input[value = "588"]').first().click({force: true});
@@ -77,8 +78,13 @@ export class PlanCreationApproveAndOrder{
         if(isIt === 'order') cy.get('select#status').select('APPROVED');
         cy.get('label').contains('Plan Creation Date(From)')
             .parent().children().find('input').type(date)
+
         cy.get('#applyFilter').contains('Apply Filters').click()
         cy.wait(2000)
+        return this
+    }
+    omniSearch(planNo){
+        cy.get('#omniSearch').type(planNo+'{enter}').wait(1000).clear();
         return this
     }
     ApprovalFlowDnothi(user){
@@ -86,6 +92,7 @@ export class PlanCreationApproveAndOrder{
             .then(text => {
                 let isPresent = /Approve/.test(text);
                 if (isPresent) {
+
                     cy.get('div table tbody tr').contains("Approve").click()
                     cy.get('#approve-btn').click().wait(2000);
                     if(user !== '01547854996') cy.get('label').contains('Suggestion').click()

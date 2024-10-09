@@ -1,7 +1,7 @@
 import {sqlQuery} from "../sqlQuery";
 const query = new sqlQuery()
 const datetime = new Date().toLocaleDateString('en-GB')
-const date = '22/09/2024'
+const date = '25/09/2024'
 function DateTime() {
     const now = new Date();
     return  now.toISOString().replace(/[-:.TZ]/g, '') + Math.random().toString(36).substring(2, 10);

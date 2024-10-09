@@ -1,5 +1,5 @@
 const username = []
-const user = '01738957729'
+const user = '01738957721'//'01738957729'
 const password = Cypress.env('password');
 let reject = 0;
 const date = new Date().toLocaleDateString('en-GB')
@@ -13,7 +13,7 @@ describe('PEPMIS End to End Testing', () => {
         cy.logIn(user, password);
         // OTP submit
         query
-            .otpOption()
+            // .otpOption()
         //go to side menu Construction and Repair Management and submenu Construction Plan List and click add new
             .findMenu()
         //select school from priority list

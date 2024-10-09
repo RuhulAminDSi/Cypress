@@ -10,7 +10,7 @@ describe('Test Page with EO bundle', () => {
     const comment = Cypress.env('comment');
     const sessionId = 1; // 1 for mid term, 2 for annual plan
     const installmentnumber = 3;
-    const percentage = 79.5;
+    const percentage = 10;
     // Handle uncaught exceptions to prevent test failure
     Cypress.on('uncaught:exception', (err, runnable) => {
         console.log('Caught an exception:', err);
@@ -48,8 +48,8 @@ describe('Test Page with EO bundle', () => {
         }
             //FORM
         {
-            cy.get(':nth-child(3) > .col-7 > .form-control').type('02.08.2024.12.11');
-            cy.get('.input-group > .form-control').type('02/08/2024');
+            cy.get(':nth-child(3) > .col-7 > .form-control').type('29.09.2024.12.11');
+            cy.get('.input-group > .form-control').type('29/09/2024');
             cy.get(':nth-child(5) > .col-7 > .form-control').type('testauto');
             cy.get(':nth-child(6) > .col-7 > .form-control').select('5133');
             cy.get('#submit-slip-bundle-request').click();

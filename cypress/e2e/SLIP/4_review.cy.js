@@ -3,9 +3,10 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const userIds = [
-        '01711111111', '01911403111', 
-        '01754191151', '01711193187', 
-        '01547854996'];
+        '01738957721', '01738957722',
+        '01738957723', '01954584575',
+        // '01547854996'
+        ];
     const loginUrl = Cypress.env('loginUrl');
     const logoutUrl = Cypress.env('logoutUrl');
     const appList = 'https://ops.ipemis.qa.innovatorslab.net/slip/bundle-requests/pending';

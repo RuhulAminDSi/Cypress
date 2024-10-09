@@ -3,10 +3,9 @@
 describe('Test Page with Multiple User IDs', () => {
     // Array of user IDs to test  
     const UEOphoneNumbers = [
-        '01716411240',
-        '01712035989',
-        '01712084072','01716411240','01864128333', '01722505413',
-        '01746183334',
+        '01712610722',
+        '01715590326',
+        '01711184278'
         
 
     ]
@@ -48,7 +47,7 @@ describe('Test Page with Multiple User IDs', () => {
                                 else {
                                     cy.get('#approve-btn').click();
                                     cy.get('#consentOfAdditionalAmount').select('false');
-                                    cy.get(':nth-child(5) > :nth-child(2) > #remarks').type(comment, { delay: 100 });
+                                    cy.get(':nth-child(5) > :nth-child(2) > #remarks').type(comment, { delay: 100, force: true});
                                     cy.get('#confirm-approve-request').click({ force: true });
                                     cy.visit(appList);
                                     cy.wait(2500)
